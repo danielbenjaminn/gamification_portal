@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard do Usuário</title>
+</head>
+<body>
+    <h1>Bem-vindo, {{ user.username }}</h1>
+
+    <h2>Desafios Atribuídos</h2>
+    {% if desafios_pendentes %}
+        <h3>Pendentes</h3>
+        <ul>
+        {% for desafio_atribuido in desafios_pendentes %}
+            <li>
+                <a href="{% url 'detalhe_desafio' desafio_atribuido.desafio.id %}">{{ desafio_atribuido.desafio.nome }}</a>                
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nenhum desafio pendente.</p>
+    {% endif %}
+
+    {% if desafios_aceitos %}
+        <h3>Desafios Aceitos</h3>
+        <ul>
+        {% for desafio_atribuido in desafios_aceitos %}
+            <li>
+                {{ desafio_atribuido.desafio.nome }} - Pontuação Total: {{ desafio_atribuido.pontuacao_total }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nenhum desafio aceito.</p>
+    {% endif %}
+</body>
+</html>
